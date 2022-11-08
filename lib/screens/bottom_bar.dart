@@ -16,11 +16,11 @@ class bottomBarScreen extends StatefulWidget {
 // ignore: camel_case_types
 class _bottomBarScreenState extends State<bottomBarScreen> {
 	// ignore: unused_field
-	int _selectedIndex = 1;
+	int _selectedIndex = 0;
 	// ignore: unused_field
 	final List<Map<String, dynamic>> _pages = [
 		{
-			'page': const HomeScreen(),
+			'page':const HomeScreen(),
 			'title': 'Home Screen',
 		},
 		{
@@ -32,7 +32,7 @@ class _bottomBarScreenState extends State<bottomBarScreen> {
 			'title': 'Cart Screen',
 		},
 		{
-			'page': const userScreen(),
+			'page': const UserScreen(),
 			'title': 'user Screen',
 		},
 	];

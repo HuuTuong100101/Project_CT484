@@ -2,15 +2,15 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 
-class userScreen extends StatefulWidget {
-  const userScreen({super.key});
+class UserScreen extends StatefulWidget {
+  const UserScreen({super.key});
 
   @override
-  State<userScreen> createState() => _userScreenState();
+  State<UserScreen> createState() => _UserScreenState();
 }
 
 // ignore: camel_case_types
-class _userScreenState extends State<userScreen> {
+class _UserScreenState extends State<UserScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

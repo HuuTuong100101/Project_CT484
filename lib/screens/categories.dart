@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-// ignore: camel_case_types
+// ignore: camel_case_types, must_be_immutable
 class categoriesScreen extends StatelessWidget {
   categoriesScreen({super.key});
 
@@ -20,7 +20,7 @@ class categoriesScreen extends StatelessWidget {
     {
       'imgPath': 'assets/images/Fila-removebg-preview.png',
     },
-     {
+    {
       'imgPath': 'assets/images/Jordan-removebg-preview.png',
     },
   ];
@@ -30,7 +30,7 @@ class categoriesScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.lightBlue,
         elevation: 0,
-        title:const Text(
+        title: const Text(
           'Categogies',
           style: TextStyle(
             fontSize: 20,
@@ -38,21 +38,14 @@ class categoriesScreen extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(30),
         child: GridView.count(
             crossAxisCount: 2,
             childAspectRatio: 240 / 250,
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 20,
+            crossAxisSpacing: 30,
+            mainAxisSpacing: 30,
             children: List.generate(
-                6,
-                (i) =>
-                    FrameCategory(
-                      context, 
-                      categogies[i]['imgPath']
-                    )
-            )
-          ),
+                6, (i) => FrameCategory(context, categogies[i]['imgPath']))),
       ),
     );
   }
@@ -63,6 +56,7 @@ class categoriesScreen extends StatelessWidget {
     double _screenWidth = MediaQuery.of(context).size.width;
     return InkWell(
       onTap: (() {
+        // ignore: avoid_print
         print("This Category");
       }),
       child: Container(
