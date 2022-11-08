@@ -2,10 +2,15 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 
-// ignore: camel_case_types
-class userScreen extends StatelessWidget {
+class userScreen extends StatefulWidget {
   const userScreen({super.key});
 
+  @override
+  State<userScreen> createState() => _userScreenState();
+}
+
+// ignore: camel_case_types
+class _userScreenState extends State<userScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,16 +66,19 @@ class userScreen extends StatelessWidget {
                 const Divider(
                   thickness: 1,
                 ),
-                const ListTile(
-                  title: Text(
+                ListTile(
+                  title: const Text(
                     "Profile",
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  leading: Icon(IconlyLight.profile),
-                  trailing: Icon(IconlyLight.arrowRight2),
+                  leading: const Icon(IconlyLight.profile),
+                  trailing: const Icon(IconlyLight.arrowRight2),
+                  onTap: () async {
+                    await _showAddressDialog(context);
+                  },
                 ),
                 const ListTile(
                   title: Text(
@@ -127,16 +135,19 @@ class userScreen extends StatelessWidget {
                   leading: Icon(IconlyLight.unlock),
                   trailing: Icon(IconlyLight.arrowRight2),
                 ),
-                const ListTile(
-                  title: Text(
+                ListTile(
+                  title: const Text(
                     "Logout",
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  leading: Icon(IconlyLight.logout),
-                  trailing: Icon(IconlyLight.arrowRight2),
+                  leading: const Icon(IconlyLight.logout),
+                  trailing: const Icon(IconlyLight.arrowRight2),
+                  onTap: () async {
+                    await _showLogoutDialog(context);
+                  },
                 ),
               ],
             ),
@@ -147,44 +158,59 @@ class userScreen extends StatelessWidget {
   }
 }
 
-// Future<void> _showAddressDialog() async {
-//   await showDialog(
-//       context: context,
-//       builder: (context) {
-//         return AlertDialog(
-//           title: const Text('Update'),
-//           content: TextField(
-//             // onChanged: (value) {
-//             //   print('_addressTextController.text ${_addressTextController.text}');
-//             // },
-//             controller: _addressTextController,
-//             maxLines: 5,
-//             decoration: const InputDecoration(hintText: "Your address"),
-//           ),
-//           actions: [
-//             TextButton(
-//               onPressed: () async {
-//                 String _uid = user!.uid;
-//                 try {
-//                   await FirebaseFirestore.instance
-//                       .collection('users')
-//                       .doc(_uid)
-//                       .update({
-//                     'shipping-address': _addressTextController.text,
-//                   });
+Future<void> _showAddressDialog(context) async {
+  await showDialog(
+      context: context,
+      builder: (context) {
+        // ignore: prefer_const_constructors
+        return AlertDialog(
+          title: const Text('Update'),
+          // ignore: prefer_const_constructors
+          content: TextField(
+            maxLines: 5,
+            decoration: const InputDecoration(hintText: "Your profile"),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () async {},
+              child: const Text('Update'),
+            )
+          ],
+        );
+      });
+}
 
-//                   Navigator.pop(context);
-//                   setState(() {
-//                     address = _addressTextController.text;
-//                   });
-//                 } catch (err) {
-//                   GlobalMethods.errorDialog(
-//                       subtitle: err.toString(), context: context);
-//                 }
-//               },
-//               child: const Text('Update'),
-//             ),
-//           ],
-//         );
-//       });
-// }
+Future<void> _showLogoutDialog(context) async {
+  await showDialog(
+      context: context,
+      builder: (context) {
+        // ignore: prefer_const_constructors
+        return AlertDialog(
+          title: Row(
+            children: const [Icon(IconlyBold.danger), Text('Sign out')],
+          ),
+          // ignore: prefer_const_constructors
+          content: const Text("Do you want sign out ?"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                if (Navigator.canPop(context)) {
+                  Navigator.pop(context);
+                }
+              },
+              child: const Text(
+                'Cancle',
+                style: TextStyle(color: Colors.red),
+              ),
+            ),
+            TextButton(
+              onPressed: () async {},
+              child: const Text(
+                'Logout',
+                style: TextStyle(color: Colors.blue),
+              ),
+            )
+          ],
+        );
+      });
+}
