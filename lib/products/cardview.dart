@@ -24,9 +24,9 @@ class _CardwidgetState extends State<Cardwidget> {
             children: [
               FancyShimmerImage(
                 imageUrl:
-                    'https://product.hstatic.net/1000343256/product/img20191016115750_7877388944f8466a802b2eabcc00c511_master.jpg',
-                height: MediaQuery.of(context).size.width * 0.25,
-                width: MediaQuery.of(context).size.width * 0.25,
+                  'https://product.hstatic.net/1000343256/product/img20191016115750_7877388944f8466a802b2eabcc00c511_master.jpg',
+                height: MediaQuery.of(context).size.width * 0.35,
+                width: MediaQuery.of(context).size.width,
                 boxFit: BoxFit.fill,
               ),
               Padding(
@@ -34,7 +34,7 @@ class _CardwidgetState extends State<Cardwidget> {
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children:[
+                  children: [
                     const Text(
                       'Name',
                       style: TextStyle(
@@ -48,7 +48,7 @@ class _CardwidgetState extends State<Cardwidget> {
                 ),
               ),
               Padding(
-                padding:const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: const [
@@ -57,6 +57,22 @@ class _CardwidgetState extends State<Cardwidget> {
                       style: TextStyle(
                         fontSize: 15,
                         color: Color.fromARGB(255, 255, 0, 0),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Text(
+                      'Add to cart',
+                      style: TextStyle(
+                        fontSize: 17,
+                        // color: Color.fromARGB(255, 255, 0, 0),
                         fontWeight: FontWeight.bold,
                       ),
                     )

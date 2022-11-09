@@ -9,16 +9,23 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-
 class _HomeScreenState extends State<HomeScreen> {
-
-  // ignore: non_constant_identifier_names
+  // ignore: unnecessary_nullable_for_final_variable_declarations
+  final TextEditingController? _searchTextController =
+      TextEditingController(); // ignore: non_constant_identifier_names
+  final FocusNode _searchTextFocusNode = FocusNode();
   final List<String> _Carousel = [
     'assets/images/carosoue1.jpg',
     'assets/images/carosoue2.jpg',
     'assets/images/carosoue3.jpg',
     'assets/images/carosoue4.jpg',
   ];
+  @override
+  void dispose() {
+    _searchTextController!.dispose();
+    _searchTextFocusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,13 +55,57 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: const EdgeInsets.all(10.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
-                children: const [
-                  Text(
+                children: [
+                  const Text(
                     "All Products",
                     style: TextStyle(
                         fontSize: 20,
                         color: Colors.lightBlue,
                         fontWeight: FontWeight.bold),
+                  ),
+                  const Spacer(),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.6,
+                    height: kBottomNavigationBarHeight,
+                    child: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: TextField(
+                        focusNode: _searchTextFocusNode,
+                        controller: _searchTextController,
+                        onChanged: (ValueKey) {
+                          setState(() {});
+                        },
+                        decoration: InputDecoration(
+                          isDense: true,
+                          contentPadding:
+                              const EdgeInsets.symmetric(vertical: 17),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide: const BorderSide(
+                                color: Colors.lightBlue, width: 1),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide: const BorderSide(
+                                color: Colors.lightBlue, width: 1),
+                          ),
+                          hintText: 'Search in here',
+                          prefixIcon: const Icon(Icons.search),
+                          suffix: IconButton(
+                            onPressed: () {
+                              _searchTextController!.clear();
+                              _searchTextFocusNode.unfocus();
+                            },
+                            icon: Icon(
+                              Icons.close,
+                              color: _searchTextFocusNode.hasFocus
+                                  ? Colors.red
+                                  : Colors.lightBlue,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                   )
                 ],
               ),
@@ -67,7 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: EdgeInsets.zero,
                 crossAxisCount: 2,
                 childAspectRatio: MediaQuery.of(context).size.width /
-                    (MediaQuery.of(context).size.height * 0.5),
+                    (MediaQuery.of(context).size.height * 0.7),
                 children: List.generate(8, (index) {
                   return const Cardwidget();
                 }),
